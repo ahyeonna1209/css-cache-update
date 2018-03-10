@@ -1,3 +1,3 @@
 # Magento 1.9.X -css-cache-update
-Adding date to css file name for easy cache refreshment
-using assetversion.txt
+
+When you make a CSS change and need to bust through browser cache, you can simply change ( increment ) the number in text.file
