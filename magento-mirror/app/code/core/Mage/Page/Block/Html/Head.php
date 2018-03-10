@@ -199,7 +199,7 @@ class Mage_Page_Block_Html_Head extends Mage_Core_Block_Template
                 empty($items['skin_js']) ? array() : $items['skin_js'],
                 $shouldMergeJs ? array(Mage::getDesign(), 'getMergedJsUrl') : null
             
-           // assetversion.txt date adding start                                               
+           // ahyeon assetversion.txt date adding start                                               
             $version = file_get_contents(BP . DS . 'assetversion.txt');
 
              $html = '';
@@ -223,7 +223,7 @@ class Mage_Page_Block_Html_Head extends Mage_Core_Block_Template
                         }
                     }
                 }                                             
-                // assetversion.txt date adding end
+                // ahyeon assetversion.txt date adding end
             );
             
             
