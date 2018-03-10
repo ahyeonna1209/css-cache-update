@@ -198,7 +198,35 @@ class Mage_Page_Block_Html_Head extends Mage_Core_Block_Template
                 empty($items['js']) ? array() : $items['js'],
                 empty($items['skin_js']) ? array() : $items['skin_js'],
                 $shouldMergeJs ? array(Mage::getDesign(), 'getMergedJsUrl') : null
+            
+           // assetversion.txt date adding start                                               
+            $version = file_get_contents(BP . DS . 'assetversion.txt');
+
+             $html = '';
+                foreach ($items as $params => $rows) {
+                    // attempt to merge
+                    $mergedUrl = false;
+                    if ($mergeCallback) {
+                        $mergedUrl = call_user_func($mergeCallback, $rows);
+                    }
+                    // render elements
+                    $params = trim($params);
+                    $params = $params ? ' ' . $params : '';
+                    if ($mergedUrl) {
+                        $html .= sprintf($format, $mergedUrl, $params);
+                    } else {
+                        foreach ($rows as $src) {
+                            if ($version) {
+                                $src.='?v=' . $version;
+                            }
+                            $html .= sprintf($format, $src, $params);
+                        }
+                    }
+                }                                             
+                // assetversion.txt date adding end
             );
+            
+            
             // other stuff
             if (!empty($items['other'])) {
                 $html .= $this->_prepareOtherHtmlHeadElements($items['other']) . "\n";
